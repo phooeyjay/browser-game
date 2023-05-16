@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web App</title>
+        <script type='module'>
+            import { initialize } from './src/game.js';
+            //initialize(document.getElementById('canvas')).begin();
+        </script>
+        <style>
+            html, body { margin: 0; height: 100dvh; }
+            body { 
+                display: flex; 
+                justify-content: center; 
+                align-items: center;
+                background: linear-gradient(#626ef3, #5865f2);
+            }
+            canvas {
+                background-color: black;
+                aspect-ratio: 16 / 9;
+                height: clamp(360px, 100dvh, 95dvh);
+            }
+        </style>
+    </head>
+    <body>
+        <canvas id='canvas'></canvas>
+    </body>
+</html>
