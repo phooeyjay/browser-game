@@ -1,41 +1,50 @@
 'use strict';
 
-export const initialize = (/** @type {HTMLElement} */renderer) => {
-    let canvas = renderer instanceof HTMLCanvasElement && renderer || (_ => { throw new TypeError(`Element "${renderer}" is not a Canvas node.`) })();
-    let old_timestamp = 0;
-    /** @type {Event[]} */ let event_queue = [];
+export default class GameApplication {
+    //#region Variables
+    #canvas; #old_timestamp; 
+    /** @type {Event[]} */#event_queue;
+    //#endregion
 
-    const input = () => {
-        while (event_queue.length !== 0) {
-            let event = event_queue.shift();
-            console.log(event);
+    //#region Methods
+    #input; #update; #render; #gameloop;
+    begin;
+    //#endregion
+
+    constructor (/** @type {HTMLElement} */ renderer) {
+        this.#canvas = renderer instanceof HTMLCanvasElement && renderer || (_ => { throw new TypeError(`Element "${renderer}" is not a Canvas node.`) })();
+        this.#old_timestamp = 0;
+        this.#event_queue = [];
+
+        this.#input = () => {
+            while (this.#event_queue.length !== 0) {
+                _ = this.#event_queue.shift();
+            }
         }
-    }
 
-    const update = /** @type {number} */ delay => {
-        // TODO
-    }
+        this.#update = /** @type {number} */ delay => {
+            // TODO
+        }
 
-    const render = () => {
-        // TODO
-    }
+        this.#render = () => {
+            // TODO
+        }
 
-    const gameloop = /** @type {number} */ timestamp => {
-        input();
-
-        update(timestamp - old_timestamp);
-        old_timestamp = timestamp;
-
-        render();
-
-        requestAnimationFrame(gameloop);
-    }
-
-    return {
-        begin: () => {
-            addEventListener('keydown', event => { event_queue.push(event) });
-            canvas.addEventListener('click', event => { event_queue.push(event) });
-            requestAnimationFrame(gameloop);
+        this.#gameloop = /** @type {number} */ timestamp => {
+            this.#input();
+    
+            this.#update(timestamp - this.#old_timestamp);
+            this.#old_timestamp = timestamp;
+    
+            this.#render();
+    
+            requestAnimationFrame(this.#gameloop);
+        }
+        
+        this.begin = () => {
+            addEventListener('keydown', event => { this.#event_queue.push(event) });
+            this.#canvas.addEventListener('click', event => { this.#event_queue.push(event) });
+            requestAnimationFrame(this.#gameloop);
         }
     }
 }
