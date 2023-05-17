@@ -8,7 +8,7 @@ export class Game {
     init = (renderer: HTMLElement) => {
         this._canvas = renderer instanceof HTMLCanvasElement && renderer || (() => { throw new TypeError('Element provided is not of type [Canvas]') })();
 
-        addEventListener('keydown', event => { this._events.push(event) });
+        ['keydown', 'mousemove'].forEach(e => { addEventListener(e, event => { this._events.push(event) }) });
         this._canvas.addEventListener('click', event => { this._events.push(event) });
 
         requestAnimationFrame(this._gameLoop);
