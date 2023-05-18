@@ -6,10 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phooeyjay/browser-game.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phooeyjay/browser-game/issues"
+  },
+  "homepage": "https://github.com/phooeyjay/browser-game#readme",
   "devDependencies": {
+    "konva": "^9.0.2",
     "typescript": "^5.0.4"
   }
 }
